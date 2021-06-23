@@ -19,8 +19,8 @@ int main(void){
 	
 	PortF_Init();
 	PortB_Init();
-  PLL_Init();               // set system clock to 80 MHz
-  SysTick_Init();           // initialize SysTick timer
+  	PLL_Init();               // set system clock to 80 MHz
+ 	SysTick_Init();           // initialize SysTick timer
 	
 	mycolorLDC();
 	while (1) {
@@ -74,7 +74,7 @@ int main(void){
 
 ////************************************End Main
 void PortF_Init(void){ 
-	volatile unsigned long delay;
+  volatile unsigned long delay;
   SYSCTL_RCGC2_R |= 0x20;         // 1) activate Port F
   delay = SYSCTL_RCGC2_R;         // allow time for clock to stabilize
   GPIO_PORTF_LOCK_R = 0x4C4F434B; // 2) unlock Port F lock
@@ -95,21 +95,21 @@ void PortF_Init(void){
 }
 
 void PortB_Init(void) {
-	unsigned long volatile delay;
-	SYSCTL_RCGC2_R |= 0x02;           // 1) activate Port B
+  unsigned long volatile delay;
+  SYSCTL_RCGC2_R |= 0x02;           // 1) activate Port B
   delay = SYSCTL_RCGC2_R;           // allow time for clock to stabilize
   GPIO_PORTB_AMSEL_R = 0x00;        // 3) disable analog functionality on PB
   GPIO_PORTB_PCTL_R &= ~0x000000FF; // 4) configure PB0,1 as GPIO
   GPIO_PORTB_DIR_R &= ~0x01;        // 5) PB0 as input
-	GPIO_PORTB_DIR_R |=  0x02;        // 5) PB1 as output
+  GPIO_PORTB_DIR_R |=  0x02;        // 5) PB1 as output
   GPIO_PORTB_AFSEL_R &= ~0x03;      // 6) disable alt funct on PB0, 1
   GPIO_PORTB_DEN_R |= 0x03;         // 7) enable digital I/O on PB0, 1
 }
 
 void waitScreen(void) {
 	  
-	ST7735_InitR(INITR_REDTAB);
-	ST7735_FillScreen(ST7735_YELLOW);
+   ST7735_InitR(INITR_REDTAB);
+   ST7735_FillScreen(ST7735_YELLOW);
 }
 
 void mycolorLDC(void) {
